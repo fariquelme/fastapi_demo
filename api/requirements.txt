@@ -1,0 +1,7 @@
+fastapi==0.61.1
+python-dotenv==0.14.0
+celery==4.4.7
+redis==3.5.3
+
+
+
