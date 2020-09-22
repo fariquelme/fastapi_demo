@@ -2,6 +2,59 @@
 
 This is a clone from yolov5 with a simple API and Celery as a task manager. It's a simple demo to test model deployment as a microservice. The default detect method has been slightly modified to use a config dict instead of the given script arguments to facilitate the integration with the API
 
+# First Steps
+
+Once you have your machine up and running, createa  new sudo user to avoid using root, it is not secure and might casue issues with some packages
+`sudo useradd -s /path/to/shell -d /home/{dirname} -m -G {secondary-group} {username}`
+
+## 1. Create Sudo User
+
+Before following the instructions below, create a new virtual environment with virtualenv or [pyenv](https://github.com/pyenv/pyenv-installer)
+
+## 2. Install Pyenv (virtual environment manager)
+
+1. Install Pyenv Dependancies
+
+`sudo apt update ; sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git`
+
+2. Install pyenv
+
+`curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash`
+
+3. add the lines below to your .bashrc
+
+```
+export PATH="/home/ubuntu/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
+1. Run the following command to make sure pyenv is callable:
+
+`source ~/.bashrc`
+
+## 3. Create New virtualenv
+
+2. Install python 3.8>
+
+`pyenv install 3.8.3`
+
+3. Create a new virtualenv with the installed version
+
+`pyenv virtualenv 3.8.3 demoyolo`
+
+
+4. Activate your virtualenv
+
+`pyenv activate demoyolo`
+
+# Optional Steps
+
+# Low RAM? , add a swapfile!
+
+If your server has 3G<= of RAM `opencv`, and `torch` might fail to build. Instructions on how to add swap can be found here [here](https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-20-04/)
+
+
 # Yolov5's original readme.
 1. Read the steps below to get the model working and be able to test the api..
 
