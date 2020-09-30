@@ -48,6 +48,12 @@ eval "$(pyenv virtualenv-init -)"
 
 `pyenv activate demoyolo`
 
+5. Set the environment variables for the project
+
+This projects uses a couple of environment variables, to set them copy the .env.example file to .env in the projects root directory, and change the environment variables needed (by default environment variables are already set to facilitate the demo)
+
+`cp .env.example .env`
+
 # Optional Steps
 
 # Low RAM? , add a swapfile!
