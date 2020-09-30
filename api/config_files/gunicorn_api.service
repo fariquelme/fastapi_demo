@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve yolo_demo
+After=network.target
+
+[Service]
+User=<username>
+Group=<username>
+WorkingDirectory=/home/<username>/fastapi_demo/api/
+Environment="PATH=/home/<username>/.pyenv/versions/yolodemo/bin"
+ExecStart=/home/<username>/.pyenv/versions/yolodemo/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
+
+[Install]
+WantedBy=multi-user.target
