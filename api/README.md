@@ -79,6 +79,52 @@ We will redirect all the incomming traffic from port `80` to port `8000` (fast a
 `sudo systemctl restart nginx`
 
 
-# Setup gunicorn
-pip install gunicorn
+# Setup daemons/services to run celery and the api automatically
 
+### Celery
+
+Before following the next steps edit the service definition `api/config_files/celery.service` and replace all the <usernmae> with the corresponding username
+
+1. Copy the service definition to let the system manager use it
+
+`sudo cp api/config_files/celery.service /etc/systemd/system/`
+
+2. Enable the service to run on startup
+
+`sudo systemctl enable celery.service`
+
+3. Enable start the service
+
+`sudo systemctl start celery.service`
+
+
+4. Check the service status to see if it is active
+
+`sudo systemctl status celery.service`
+
+5. Open the tasks monitor
+
+This lets us know when the tasks arrive, and if they are sucessfull or failed
+
+`celery -A celery_conf events`
+
+### Gunicorn
+
+Before following the next steps edit the service definition `api/config_files/gunicorn_api.service` and replace all the <usernmae> with the corresponding username
+
+1. Copy the service definition to let the system manager use it
+
+`sudo cp api/config_files/gunicorn_api.service /etc/systemd/system/`
+
+2. Enable the service to run on startup
+
+`sudo systemctl enable gunicorn_api.service`
+
+3. Enable start the service
+
+`sudo systemctl start gunicorn_api.service`
+
+
+4. Check the service status to see if it is active
+
+`sudo systemctl status gunicorn_api.service`
