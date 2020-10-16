@@ -7,7 +7,7 @@ User=<username>
 Group=<username>
 WorkingDirectory=/home/<username>/fastapi_demo/api/
 Environment="PATH=/home/<username>/.pyenv/versions/yolodemo/bin"
-ExecStart=/home/<username>/.pyenv/versions/yolodemo/bin/celery -A celery_conf worker --loglevel=info 
+ExecStart=/home/<username>/.pyenv/versions/yolodemo/bin/celery -A celery_conf worker --loglevel=info --time-limit=36000
 ExecStartPost=/home/<username>/.pyenv/versions/yolodemo/bin/celery -A celery_conf control enable_events
 
 [Install]
