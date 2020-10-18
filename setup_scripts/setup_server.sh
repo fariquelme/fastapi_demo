@@ -6,7 +6,7 @@ set -e
 echo 'Creating sudo user'
 echo 'Username:'
 read USERNAME
-sudo useradd -s /bin/bash -d /home/USERNAME -m -G sudo $USERNAME
+sudo useradd -s /bin/bash -d /home/$USERNAME -m -G sudo $USERNAME
 echo 'Please set the password for your new user:'
 passwd $USERNAME
 
@@ -35,5 +35,17 @@ else
 fi
 
 echo "Moving repo to new user\'s home dir (/home/$USERNAME/)"
+
+current_dir=$(pwd)
+parent_dir=$(dirname "$current_dir")
+cp -r  $parent_dir /home/$USERNAME
+
+rm -r $parent_dir
+
+chown -R $USERNAME:$USERNAME /home/$USERNAME
+
+cd /home/$USERNAME
+su $USERNAME
+
 
 tput setaf 2; echo 'done'; tput sgr0;

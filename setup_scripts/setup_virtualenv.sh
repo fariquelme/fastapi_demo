@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Exit on error
-set -e
-
 if [ "$#" -eq 2 ]
  then
         PYTHON_VERSION=$1
@@ -44,8 +41,20 @@ pyenv virtualenv $PYTHON_VERSION $VIRTUALENV_NAME
 
 # Activate created virtualenv
 pyenv activate $VIRTUALENV_NAME
+echo 'pyenv activate $VIRTUALENV_NAME' >> ~/.bashrc
 
-# Set default virtualenv
-pyenv global $VIRTUALENV_NAME
+# Install model python packages
+pip install -r ../requirements.txt
+
+# Install api python packages
+pip install -r ../api/requirements.txt
+
+# Install system packages
+
+# Copy defualt env variables (includes default reddis password)
+cp ../.env.example ../.env
+
+
+
 
 tput setaf 2; echo 'done'; tput sgr0;

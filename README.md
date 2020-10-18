@@ -1,6 +1,6 @@
 # ABOUT
 
-This is a clone from yolov5 with a simple API and Celery as a task manager. It's a simple demo to test model deployment as a microservice. The default detect method has been slightly modified to use a config dict instead of the given script arguments to facilitate the integration with the API
+This is a clone from yolov5 with a simple API to query for detections. It's a simple demo to test model deployment as a microservice. The default detect method has been slightly modified to use a config dict instead of the given script arguments to facilitate the integration with the API
 
 # First Steps
 

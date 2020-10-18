@@ -1,7 +1,5 @@
 fastapi==0.61.1
 python-dotenv==0.14.0
-celery==4.4.7
-redis==3.5.3
 uvicorn==0.11.8
 gunicorn==20.0.4
 python-multipart==0.0.5

@@ -12,9 +12,6 @@ from numpy import random
 
 # Scripts
 
-from celery_conf import app
-
-
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import (
@@ -24,7 +21,6 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 
 
-@app.task(name='yolo-detect')
 def detect(config, save_img=False):
     out, source, weights, view_img, save_txt, imgsz = config['output'], config['source'], config['weights'], config['view_img'], config['save_txt'], config['img_size']
     webcam = source.isnumeric() or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt')

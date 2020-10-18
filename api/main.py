@@ -16,7 +16,6 @@ import settings
 from api.utils.filesystem import make_dir, file_from_bytes
 from detect import detect
 from fastapi.responses import FileResponse
-# CELERY STUFF
 
 app = FastAPI()
 # ! DEPLOY USING THIS https://dev.to/shuv1824/deploy-fastapi-application-on-ubuntu-with-nginx-gunicorn-and-uvicorn-3mbl
@@ -46,12 +45,7 @@ async def create_files(file: UploadFile = File(...)):
                 'augment':'store_true',
                 'update':False
             }
-    detect.delay(config)
-    return {'Status': 'processing image, request the results at endpoint show_img'}
-
-@app.get("/show_img/")
-async def show_detected_img():
-
+    detect(config)
     output_path = make_dir(dir_path=f'{os.getenv("MODEL_OUTPUTS")}')
     return FileResponse(str(output_path/'tmp.jpeg'))
 
