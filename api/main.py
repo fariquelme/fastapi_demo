@@ -13,23 +13,25 @@ sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 # Scripts
 import settings
-from api.utils.filesystem import make_dir, file_from_bytes
+from api.utils.filesystem import make_dir
 from detect import detect
 from fastapi.responses import FileResponse
 
 app = FastAPI()
-# ! DEPLOY USING THIS https://dev.to/shuv1824/deploy-fastapi-application-on-ubuntu-with-nginx-gunicorn-and-uvicorn-3mbl
+
+# Detect endpoint
 @app.post("/detect/")
 async def create_files(file: UploadFile = File(...)):
     '''
     Receives a list of files and saves them to model paths
     '''
+    # Create uploads directory if not exists
     dir_path =  make_dir(dir_path=f'{os.getenv("UPLOADS_PATH")}/model/tmp/')
-    
-    file_path =  file_from_bytes(file.file, dir_path, 'tmp.jpeg')
-    print(file_path)
 
+    # Create outputs directory if not exists
     output_path = make_dir(dir_path=f'{os.getenv("MODEL_OUTPUTS")}')
+
+    # Yolo Config Dict
     config= {
                 'weights':'yolov5s.pt',
                 'source':str(dir_path),
@@ -45,10 +47,15 @@ async def create_files(file: UploadFile = File(...)):
                 'augment':'store_true',
                 'update':False
             }
+    # Yolo Detect Objects
     detect(config)
+
+    # Image with objects path
     output_path = make_dir(dir_path=f'{os.getenv("MODEL_OUTPUTS")}')
+    # Return image with objects as response
     return FileResponse(str(output_path/'tmp.jpeg'))
 
+# Home endpoint, returns simple html  
 @app.get("/")
 async def main():
     content = """
