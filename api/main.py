@@ -52,15 +52,24 @@ async def create_files(file: UploadFile = File(...)):
 @app.get("/")
 async def main():
     content = """
-<body>
-<form action="/detect/" enctype="multipart/form-data" method="post">
-<input name="file" type="file">
-<input type="submit">
-</form>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
-<form action="/show_img/" method="get">
-<input type="submit">
-</form>
-</body>
+<body>
+<form class="text-center border border-light p-5" action="/detect/" enctype="multipart/form-data" method="post">
+<h1>Detecta Objetos en Imágenes</h1>
+<p> Esta demo usa yolov5 y fastapi</p>
+<div>
+  <label for="files" class="btn ">Seleccionar Imagen</label>
+  <input name="file" id="files" style="visibility:hidden;" type="file">
+  <label for="btnUpload" class="btn btn-primary">Detectar Objetos!</label>
+  <input name="btnUpload" id="btnUpload" style="visibility:hidden;" type="submit">
+</div>
     """
     return HTMLResponse(content=content)

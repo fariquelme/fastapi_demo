@@ -25,6 +25,8 @@ sudo ufw enable
 
 # Enable traffic on port 80
 sudo ufw allow 80/tcp
+# Enable ssh connections
+sudo ufw allow ssh
 
 # Add gunicorn server reverse proxy setting
 sudo cp ../api/config_files/reverse-proxy-yolo.conf /etc/nginx/sites-available/reverse-proxy-yolo.conf
