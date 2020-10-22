@@ -10,11 +10,12 @@ To connect to the machine, you have to allow traffic on port 80 (default https p
 ### 1. Enable the firewall
 `sudo ufw enable`
 
-### 2. Allow traffic on port `80`
+### 2. Allow traffic on port `80` and ssh
 `sudo ufw allow {port}/tcp`
+`sudo ufw allow ssh`
 
-### 3. 
-Check if the port is listening and allowing connections from any ip
+
+### 3. Check if the port is listening and allowing connections from any ip
 
 `sudo ufw status`
 
