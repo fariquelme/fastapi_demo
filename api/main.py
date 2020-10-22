@@ -13,7 +13,7 @@ sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 # Scripts
 import settings
-from api.utils.filesystem import make_dir
+from api.utils.filesystem import make_dir, file_from_bytes 
 from detect import detect
 from fastapi.responses import FileResponse
 
@@ -30,6 +30,9 @@ async def create_files(file: UploadFile = File(...)):
 
     # Create outputs directory if not exists
     output_path = make_dir(dir_path=f'{os.getenv("MODEL_OUTPUTS")}')
+
+    # Create file from request bytes
+    file_path =  file_from_bytes(file.file, dir_path, 'tmp.jpeg')
 
     # Yolo Config Dict
     config= {
